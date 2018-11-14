@@ -8,7 +8,7 @@ window.onload = function () {
     let y = 200
     let state = 1
     let speed = 0
-    let maxSpeed = 15
+    let maxSpeed = 12
     let gravity = 20
     let acceleration = 1
     let desceleration = 1
@@ -76,7 +76,7 @@ window.onload = function () {
             } else {
                 state--
             }
-        }, speed * 50)
+        }, speed * 100)
     }
 
     function holdDirection() {

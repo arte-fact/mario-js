@@ -17,8 +17,6 @@ body {
     margin: 0;
     overflow: hidden;
     box-shadow: royalblue 119px 16px 163px;
-    animation: turn-on 2s ease;
-    animation-fill-mode: forwards;
 }
 
 .crt::after {
