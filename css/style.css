@@ -1,0 +1,6 @@
+.mario {
+    height: 50px;
+    position: absolute;
+    transition: left ease 0.5s;
+    transition: right ease 0.5s;
+}
