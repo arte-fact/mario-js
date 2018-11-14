@@ -2,7 +2,10 @@ body {
     display: flex;
     align-items: center;
     flex-flow: column;
-    background: rgba(0, 0, 0, 0.76);
+    background-image: url(../static/space-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
 }
 
 .mario {
