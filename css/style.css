@@ -48,6 +48,6 @@ body {
     width: 913px;
     height: 647px;
     top: 93px;
-    left: 237px;
     overflow: visible;
+    transform: translateX(-5px);
 }
