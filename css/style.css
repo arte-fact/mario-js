@@ -54,3 +54,11 @@ body {
     overflow: visible;
     transform: translateX(-5px);
 }
+
+.title {
+    color: #533131;
+    font-family: "DejaVu Sans Condensed";
+    text-shadow: white 4px 2px 7px;
+    text-decoration-color: aquamarine;
+    text-decoration-style: wavy;
+}
