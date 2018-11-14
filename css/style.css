@@ -51,10 +51,13 @@ body {
     position: absolute;
 }
 
-.title {
-    color: #533131;
-    font-family: "DejaVu Sans Condensed";
-    text-shadow: white 4px 2px 7px;
-    text-decoration-color: aquamarine;
-    text-decoration-style: wavy;
+@keyframes flicker {
+
+    50% {
+        opacity: 0.5407184763;
+    }
+
+    100% {
+        opacity: 0.8429888213;
+    }
 }
