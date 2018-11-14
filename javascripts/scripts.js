@@ -8,7 +8,7 @@ window.onload = function () {
     let y = 200
     let state = 1
     let speed = 0
-    let maxSpeed = 20
+    let maxSpeed = 15
     let gravity = 20
     let acceleration = 1
     let desceleration = 1
@@ -59,10 +59,11 @@ window.onload = function () {
         setInterval(function () {
 
             let playerRelativeX = playerCharacter.offsetLeft - container.scrollLeft
+            document.getElementById("infos").innerText = "Speed: " + speed
 
+            animateCharacter()
             holdDirection()
             makeMove()
-            animateCharacter()
             makeJump()
             makeGravity()
             autoScroll(playerRelativeX)
@@ -167,9 +168,13 @@ window.onload = function () {
     }
 
     function animateCharacter() {
-        if (speed !== 0) {
+        if (speed === 0) {
+            mario1.style.visibility = "visible"
+            mario2.style.visibility = "hidden"
+            mario3.style.visibility = "hidden"
+        } else {
             mario1.style.visibility = "hidden"
-            if (state === 1 ) {
+            if (state === 1) {
                 mario2.style.visibility = "hidden"
                 mario3.style.visibility = "visible"
             }
@@ -179,11 +184,11 @@ window.onload = function () {
             }
         }
 
-        if (left === true && leftCollision()) {
+        if (left === true) {
             playerCharacter.style.webkitTransform = "scaleX(-1)"
         }
 
-        if (right === true && rightCollision()) {
+        if (right === true) {
             playerCharacter.style.webkitTransform = "scaleX(1)"
         }
     }

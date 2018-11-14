@@ -8,12 +8,7 @@ body {
     background-color: black;
 }
 
-.mario {
-    height: 50px;
-    position: absolute;
-}
-
-.container {
+.crt {
     top: 100px;
     background-color: cornflowerblue;
     position: fixed;
@@ -22,10 +17,8 @@ body {
     margin: 0;
     overflow: hidden;
     box-shadow: royalblue 119px 16px 163px;
-}
-
-.ground {
-    border-radius: 0;
+    animation: turn-on 2s ease;
+    animation-fill-mode: forwards;
 }
 
 .crt::before {
@@ -41,9 +34,10 @@ body {
     z-index: 2;
     background-size: 100% 3px, 4px 100%;
     pointer-events: none;
+    animation: flicker 0.15s infinite;
 }
 
-.crt::after {
+.tv {
     content: " ";
     display: block;
     position: fixed;
@@ -53,7 +47,11 @@ body {
     height: 647px;
     top: 93px;
     overflow: visible;
-    transform: translateX(-5px);
+    transform: translateX(5px);
+}
+.mario {
+    height: 50px;
+    position: absolute;
 }
 
 .title {
