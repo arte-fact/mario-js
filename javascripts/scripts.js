@@ -1,82 +1,83 @@
 window.onload = function () {
-    let keyBox = document.getElementById('character')
+    let playerCharacter = document.getElementById('character')
+    let container = document.getElementById("container")
     let mario1 = document.getElementById('mario1')
     let mario2 = document.getElementById('mario2')
     let mario3  = document.getElementById('mario3')
-    let x = 20
-    let y = 20
+    let x = 200
+    let y = 200
     let speed = 0
-    let maxSpeed = 2
+    let maxSpeed = 10
+    let altitude = 400
+    let gravity = 20
+    let acceleration = 1
+    let desceleration = 1
+    let jumpHeight = 200
 
-    let altitude = 60
-    let gravity = 3
-    let acceleration = 0.05
+    let stageSize = 3000
 
     mario1.style.visibility = "visible"
     mario2.style.visibility = "hidden"
     mario3.style.visibility = "hidden"
 
-    keyBox.style.position = "absolute"
+    playerCharacter.style.position = "absolute"
+    playerCharacter.style.top = x + "px"
+    playerCharacter.style.left = y + "px"
 
-    keyBox.style.top = x + "%"
-    keyBox.style.left = y + "%"
+    let isJumpEnded = false
+    let left = false
+    let right = false
+    let spaceBar = false
 
-    let left = false;
-
-    let right = false;
-    let spaceBar = false;
+    generateWorld(altitude, container, stageSize)
     play()
 
     window.addEventListener("keypress", function (event) {
-        if (event.key === " ") {
-            spaceBar = true
-        }
-        if (event.key === "d") {
-            right = true;
-        }
-        if (event.key === "q") {
-            left = true;
+        switch (event.key) {
+            case " ": spaceBar = true
+                break
+            case "d": right = true
+                break
+            case "q": left = true
+                break
         }
     });
 
     window.addEventListener("keyup", function onKeyUp(event) {
-        if (event.key === " ") {
-            spaceBar = false;
-        }
-        if (event.key === "d") {
-            right = false;
-        }
-        if (event.key === "q") {
-            left = false;
+        switch (event.key) {
+            case " ": spaceBar = false
+                break
+            case "d": right = false
+                break
+            case "q": left = false
+                break
         }
     });
 
     function play() {
         let state = 1
         setInterval(function () {
-            document.getElementById("speed").innerText = "Speed: " + speed
-            document.getElementById("left").innerText = "left: " + left
-            document.getElementById("right").innerText = "right: " + right
-            document.getElementById("spacebar").innerText = "spacebar: " + spaceBar
 
-            if (left === true) {
+            let playerRelativeX = playerCharacter.offsetLeft - container.scrollLeft
+
+            if (left === true && playerCharacter.offsetLeft > 50) {
                 mario1.style.visibility = "hidden"
                 mario2.style.visibility = "hidden"
                 mario3.style.visibility = "visible"
-                keyBox.style.webkitTransform = "scaleX(-1)"
+                playerCharacter.style.webkitTransform = "scaleX(-1)"
 
                 x -= speed
-                keyBox.style.left = x + "%"
+                playerCharacter.style.left = x + "px"
             }
 
-            if (right === true) {
+            if (right === true && playerCharacter.offsetLeft < stageSize) {
                 mario1.style.visibility = "hidden"
                 mario2.style.visibility = "visible"
                 mario3.style.visibility = "hidden"
 
-                keyBox.style.webkitTransform = "scaleX(1)"
+                playerCharacter.style.webkitTransform = "scaleX(1)"
                 x += speed
-                keyBox.style.left = x + "%"
+                playerCharacter.style.left = x + "px"
             }
 
             if (left === false && right === false) {
@@ -87,7 +88,7 @@ window.onload = function () {
 
             if (left === false && right === false) {
                 if (speed > 0) {
-                    speed -= acceleration
+                    speed -= desceleration
                 } else {
                     speed = 0
                 }
@@ -109,14 +110,36 @@ window.onload = function () {
             }
 
             if (spaceBar === true) {
-                y -= gravity
-                keyBox.style.top = y + "%"
+                if (y > altitude - jumpHeight && isJumpEnded === false) {
+                    y -= gravity
+                    playerCharacter.style.top = y + "px"
+                } else {
+                    isJumpEnded = true
+                    if (y < altitude) {
+                        y += gravity
+                        playerCharacter.style.top = y + "px"
+                    }
+                }
+            } else {
+                isJumpEnded = false
             }
 
             if (y < altitude && spaceBar === false) {
                 y += gravity
-                keyBox.style.top = y + "%"
+                playerCharacter.style.top = y + "px"
             }
+
+            if (playerRelativeX > 350) {
+                container.scrollLeft += Math.ceil(speed)
+            } else {
+                container.scrollLeft = x - 100
+            }
+
+            if (playerRelativeX < 200) {
+                container.scrollLeft -= Math.ceil(speed)
+            }
+
+
         }, 16)
 
         setInterval(function () {
@@ -127,4 +150,18 @@ window.onload = function () {
             }
         }, speed * 50)
     }
+}
+
+
+function generateWorld(altitude, container, stageSize) {
+    let ground = document.createElement("div")
+    ground.classList.add("ground")
+    ground.style.position = "relative"
+    ground.style.top = altitude + 48 + "px"
+    ground.style.backgroundImage = "url('static/ground.png')"
+    ground.style.backgroundSize = "50px"
+    ground.style.height= (600 - altitude) + "px"
+    ground.style.width = stageSize + "px"
+
+    container.appendChild(ground)
 }
