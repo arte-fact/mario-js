@@ -21,6 +21,7 @@ body {
     height: 600px;
     margin: 0;
     overflow: hidden;
+    box-shadow: royalblue 119px 16px 163px;
 }
 
 .ground {

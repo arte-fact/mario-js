@@ -7,13 +7,13 @@ window.onload = function () {
     let x = 200
     let y = 200
     let speed = 0
-    let maxSpeed = 10
-    let altitude = 400
+    let maxSpeed = 20
     let gravity = 20
     let acceleration = 1
     let desceleration = 1
     let jumpHeight = 200
 
+    let altitude = 400
     let stageSize = 3000
 
     mario1.style.visibility = "visible"
@@ -60,44 +60,54 @@ window.onload = function () {
 
             let playerRelativeX = playerCharacter.offsetLeft - container.scrollLeft
 
-            if (left === true && playerCharacter.offsetLeft > 50) {
+            if (leftCollision(playerCharacter) && speed < 0) {
+                x += speed
+                playerCharacter.style.left = x + "px"
+            }
+            if (rightCollision(playerCharacter, stageSize) && speed > 0) {
+                x += speed
+                playerCharacter.style.left = x + "px"
+            }
+
+            if (left === true && leftCollision(playerCharacter)) {
                 mario1.style.visibility = "hidden"
                 mario2.style.visibility = "hidden"
                 mario3.style.visibility = "visible"
                 playerCharacter.style.webkitTransform = "scaleX(-1)"
-
-                x -= speed
-                playerCharacter.style.left = x + "px"
             }
 
-            if (right === true && playerCharacter.offsetLeft < stageSize) {
+            if (right === true && rightCollision(playerCharacter, stageSize)) {
                 mario1.style.visibility = "hidden"
                 mario2.style.visibility = "visible"
                 mario3.style.visibility = "hidden"
-
                 playerCharacter.style.webkitTransform = "scaleX(1)"
-                x += speed
-                playerCharacter.style.left = x + "px"
             }
 
             if (left === false && right === false) {
                 mario1.style.visibility = "visible"
                 mario2.style.visibility = "hidden"
                 mario3.style.visibility = "hidden"
-            }
-
-            if (left === false && right === false) {
                 if (speed > 0) {
                     speed -= desceleration
-                } else {
-                    speed = 0
+                }
+                if (speed < 0) {
+                    speed += desceleration
                 }
             }
 
-            if (left === true || right === true) {
+            if (left === true) {
+                if (speed > -1 * maxSpeed) {
+                    speed -= acceleration
+                }
+            }
+
+            if (right === true) {
                 if (speed < maxSpeed) {
                     speed += acceleration
                 }
+            }
+
+            if (speed !== 0) {
                 mario1.style.visibility = "hidden"
                 if (state === 1 ) {
                     mario2.style.visibility = "hidden"
@@ -129,14 +139,12 @@ window.onload = function () {
                 playerCharacter.style.top = y + "px"
             }
 
-            if (playerRelativeX > 350) {
-                container.scrollLeft += Math.ceil(speed)
-            } else {
-                container.scrollLeft = x - 100
+            if (playerRelativeX > 400) {
+                container.scrollLeft += Math.ceil(Math.abs(speed))
             }
 
             if (playerRelativeX < 200) {
-                container.scrollLeft -= Math.ceil(speed)
+                container.scrollLeft -= Math.ceil(Math.abs(speed))
             }
 
 
@@ -164,4 +172,12 @@ function generateWorld(altitude, container, stageSize) {
     ground.style.width = stageSize + "px"
 
     container.appendChild(ground)
+}
+
+function leftCollision(playerCharacter) {
+    return playerCharacter.offsetLeft > 100
+}
+
+function rightCollision(playerCharacter, stageSize) {
+    return playerCharacter.offsetLeft < (stageSize - 200)
 }
