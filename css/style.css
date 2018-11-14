@@ -21,7 +21,7 @@ body {
     animation-fill-mode: forwards;
 }
 
-.crt::before {
+.crt::after {
     content: " ";
     display: block;
     position: absolute;
@@ -38,7 +38,6 @@ body {
 }
 
 .tv {
-    content: " ";
     display: block;
     position: fixed;
     background-image: url(../static/tv-overlay.png);
