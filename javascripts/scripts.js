@@ -1,56 +1,61 @@
 window.onload = function () {
-    let playerCharacter = document.getElementById('character')
     let container = document.getElementById("container")
-    let mario1 = document.getElementById('mario1')
-    let mario2 = document.getElementById('mario2')
-    let mario3  = document.getElementById('mario3')
-    let x = 200
-    let y = 200
-    let state = 1
-    let speed = 0
-    let maxSpeed = 12
-    let gravity = 20
-    let acceleration = 1
-    let desceleration = 1
-    let jumpHeight = 200
 
-    let altitude = 400
+    let altitude = 550
     let stageSize = 3000
 
-    mario1.style.visibility = "visible"
-    mario2.style.visibility = "hidden"
-    mario3.style.visibility = "hidden"
+    let state = 0
 
-    playerCharacter.style.position = "absolute"
-    playerCharacter.style.top = x + "px"
-    playerCharacter.style.left = y + "px"
+    generateForeground()
+    let midGround = generateMidground()
+    container.appendChild(midGround)
+    generateBackground()
 
-    let isJumpEnded = false
-    let left = false
-    let right = false
-    let spaceBar = false
 
-    generateWorld(altitude, container, stageSize)
+    let playerSprites = [
+        'static/mario1.png',
+        'static/mario2.png',
+        'static/mario3.png'
+    ]
+
+    let zombieSprites = [
+        'static/zombie/1.png',
+        'static/zombie/2.png',
+        'static/zombie/3.png'
+    ]
+
+    let zombies = []
+
+    for (let i = 0; i < 5; i++) {
+        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`)
+        zombie = zombie.spawn(container)
+        zombie.printCharacter(container)
+        zombies.push(zombie)
+    }
+
+    let player = new Character(playerSprites, 300 , 200, 20, 5, 15, 40, 50, "player")
+    player = player.spawn(container)
+    player.printCharacter(container)
     play()
 
     window.addEventListener("keypress", function (event) {
         switch (event.key) {
-            case " ": spaceBar = true
+            case " ": player.isJumping = true
                 break
-            case "d": right = true
+            case "d": player.right = true
                 break
-            case "q": left = true
+            case "q": player.left = true
                 break
         }
     });
 
     window.addEventListener("keyup", function onKeyUp(event) {
         switch (event.key) {
-            case " ": spaceBar = false
+            case " ": player.isJumping = false
                 break
-            case "d": right = false
+            case "d": player.right = false
                 break
-            case "q": left = false
+            case "q": player.left = false
                 break
         }
     });
@@ -58,16 +63,26 @@ window.onload = function () {
     function play() {
         setInterval(function () {
 
-            let playerRelativeX = playerCharacter.offsetLeft - container.scrollLeft
-            document.getElementById("infos").innerText = "Speed: " + speed
+            let playerRelativeX = player.character.offsetLeft - container.scrollLeft
 
-            animateCharacter()
-            holdDirection()
-            makeMove()
-            makeJump()
-            makeGravity()
+            player.operateGravity(altitude)
+            player.direction()
+            player.run()
+            player.move()
+            player.animate(state)
+            // player.debug()
+
+            for (let j = 0; j < zombies.length; j++) {
+                let zombie = zombies[j]
+                followPlayer(zombie, player)
+                zombie.operateGravity(altitude)
+                zombie.animate(state)
+                zombie.direction()
+                zombie.run()
+                zombie.move()
+            }
+
             autoScroll(playerRelativeX)
-
         }, 16)
 
         setInterval(function () {
@@ -76,120 +91,67 @@ window.onload = function () {
             } else {
                 state--
             }
-        }, speed * 100)
-    }
-
-    function holdDirection() {
-        if (left === false && right === false) {
-            if (speed > 0) {
-                speed -= desceleration
-            }
-            if (speed < 0) {
-                speed += desceleration
-            }
-        }
-
-        if (left === true) {
-            if (speed > -1 * maxSpeed) {
-                speed -= acceleration
-            }
-        }
-
-        if (right === true) {
-            if (speed < maxSpeed) {
-                speed += acceleration
-            }
-        }
-    }
-
-    function makeJump() {
-        if (spaceBar === true) {
-            if (y > altitude - jumpHeight && isJumpEnded === false) {
-                y -= gravity
-                playerCharacter.style.top = y + "px"
-            } else {
-                isJumpEnded = true
-                if (y < altitude) {
-                    y += gravity
-                    playerCharacter.style.top = y + "px"
-                }
-            }
-        } else {
-            isJumpEnded = false
-        }
-    }
-    function makeMove() {
-        if (leftCollision() && speed < 0) {
-            x += speed
-            playerCharacter.style.left = x + "px"
-        }
-        if (rightCollision() && speed > 0) {
-            x += speed
-            playerCharacter.style.left = x + "px"
-        }
-    }
-
-    function makeGravity() {
-        if (y < altitude && spaceBar === false) {
-            y += gravity
-            playerCharacter.style.top = y + "px"
-        }
+        }, 66)
     }
 
     function autoScroll(playerRelativeX) {
         if (playerRelativeX > 400) {
-            container.scrollLeft += Math.ceil(Math.abs(speed))
+            container.scrollLeft += Math.abs(player.speed)
         }
 
         if (playerRelativeX < 200) {
-            container.scrollLeft -= Math.ceil(Math.abs(speed))
+            container.scrollLeft -= Math.abs(player.speed)
         }
     }
 
-    function generateWorld() {
-        let ground = document.createElement("div")
-        ground.classList.add("ground")
-        ground.style.position = "relative"
-        ground.style.top = altitude + 48 + "px"
-        ground.style.backgroundImage = "url('static/ground.png')"
-        ground.style.backgroundSize = "50px"
-        ground.style.height= (600 - altitude) + "px"
-        ground.style.width = stageSize + "px"
+    function generateBackground() {
+        let background = document.createElement("div")
+        background.style.position = "fixed"
+        background.style.top = "0px"
+        background.style.backgroundImage = "url('static/far-buildings.png')"
+        background.style.backgroundSize = "1100px"
+        background.style.height= "800px"
+        background.style.width = "800px"
+        background.style.zIndex = 0
 
-        container.appendChild(ground)
+        background.style.overflow = "hidden"
+
+        container.appendChild(background)
     }
 
-    function leftCollision() {
-        return playerCharacter.offsetLeft > 100
+    function generateForeground() {
+        let foreGround = document.createElement("div")
+        foreGround.style.position = "absolute"
+        foreGround.style.top = "0px"
+        foreGround.style.backgroundImage = "url('static/foreground.png')"
+        foreGround.style.backgroundSize = "1100px"
+        foreGround.style.height= "1200px"
+        foreGround.style.width = stageSize + "px"
+        foreGround.style.zIndex = 2
+
+        container.appendChild(foreGround)
     }
 
-    function rightCollision() {
-        return playerCharacter.offsetLeft < (stageSize - 200)
+    function generateMidground() {
+        let midGround = document.createElement("div")
+        midGround.style.position = "absolute"
+        midGround.style.top = "0px"
+        midGround.style.backgroundImage = "url('static/back-buildings.png')"
+        midGround.style.backgroundSize = "1100px"
+        midGround.style.height= "800px"
+        midGround.style.width = stageSize + "px"
+        midGround.style.zIndex = 1
+
+        return midGround
     }
 
-    function animateCharacter() {
-        if (speed === 0) {
-            mario1.style.visibility = "visible"
-            mario2.style.visibility = "hidden"
-            mario3.style.visibility = "hidden"
+    function followPlayer(entity, player) {
+        if (entity.character.offsetLeft > player.character.offsetLeft) {
+            entity.left = true
+            entity.right = false
         } else {
-            mario1.style.visibility = "hidden"
-            if (state === 1) {
-                mario2.style.visibility = "hidden"
-                mario3.style.visibility = "visible"
-            }
-            if (state === 0) {
-                mario2.style.visibility = "visible"
-                mario3.style.visibility = "hidden"
-            }
-        }
-
-        if (left === true) {
-            playerCharacter.style.webkitTransform = "scaleX(-1)"
-        }
-
-        if (right === true) {
-            playerCharacter.style.webkitTransform = "scaleX(1)"
+            entity.left = false
+            entity.right = true
         }
     }
 }

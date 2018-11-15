@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="342e431b-3591-44cd-be13-6801e0d88d82" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/css/animations.css" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/javascripts/character.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/back-buildings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/far-buildings.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/zombie/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/mario1.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/mario1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/mario2.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/mario2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/mario3.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/mario3.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -104,41 +120,59 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="591" />
-          <entry key="html" value="169" />
-          <entry key="js" value="2061" />
+          <entry key="css" value="658" />
+          <entry key="html" value="212" />
+          <entry key="js" value="7018" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="591" />
-          <entry key="HTML" value="169" />
-          <entry key="JavaScript" value="2061" />
+          <entry key="CSS" value="658" />
+          <entry key="HTML" value="249" />
+          <entry key="JavaScript" value="6981" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
-          <entry key="js" value="1" />
+          <entry key="js" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="JavaScript" value="1" />
+          <entry key="JavaScript" value="2" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45107034">
+    <splitter split-orientation="horizontal" split-proportion="0.42248908">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="120">
+                  <caret line="8" selection-start-line="8" selection-end-line="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/css/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="618">
-                  <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
+                <state relative-caret-position="605">
+                  <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/javascripts/scripts.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="755">
+                  <caret line="154" column="9" lean-forward="true" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
@@ -150,26 +184,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/javascripts/scripts.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="144" column="52" lean-forward="true" selection-start-line="144" selection-start-column="52" selection-end-line="144" selection-end-column="52" />
+                <state relative-caret-position="825">
+                  <caret line="94" column="5" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="5" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/index.html">
+            <entry file="file://$PROJECT_DIR$/javascripts/character.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="5" column="64" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/css/crt_effect.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="649">
-                  <caret line="211" selection-start-line="211" selection-end-line="211" />
+                <state relative-caret-position="225">
+                  <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="46" />
                 </state>
               </provider>
             </entry>
@@ -190,10 +215,24 @@
     <findStrings>
       <find>keyBox</find>
       <find>%</find>
+      <find>speed</find>
+      <find>wheight</find>
+      <find>acceleration</find>
+      <find>foreGroud</find>
+      <find>foreGround</find>
+      <find>overflow</find>
+      <find>this.character</find>
     </findStrings>
     <replaceStrings>
       <replace>playerCharacter</replace>
       <replace>px</replace>
+      <replace>this.speed</replace>
+      <replace>weight</replace>
+      <replace>stamina</replace>
+      <replace>foreGroud</replace>
+      <replace>foreGround</replace>
+      <replace>midGround</replace>
+      <replace>sprite</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -203,10 +242,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/css/crt_effect.css" />
-        <option value="$PROJECT_DIR$/javascripts/scripts.js" />
         <option value="$PROJECT_DIR$/css/animations.css" />
         <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/javascripts/character.js" />
+        <option value="$PROJECT_DIR$/javascripts/scripts.js" />
       </list>
     </option>
   </component>
@@ -228,18 +268,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="mario-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="mario-js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mario-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mario-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mario-js" type="b2602c69:ProjectViewProjectNode" />
@@ -251,11 +286,17 @@
               <item name="mario-js" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="mario-js" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mario-js" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="zombie" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,6 +314,7 @@
       <recent name="$PROJECT_DIR$/static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/zombie" />
       <recent name="$PROJECT_DIR$/css" />
     </key>
   </component>
@@ -320,10 +362,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57739000" />
+    <option name="totallyTimeSpent" value="83188000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1533" height="1175" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
@@ -332,10 +374,9 @@
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.120376594" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info content_ui="combo" id="Project" order="6" weight="0.16812228" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3294979" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -343,9 +384,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.33014354" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.33995816" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -404,34 +446,33 @@
     <entry file="file://$PROJECT_DIR$/static/mario1.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/scripts.js">
+    <entry file="file://$PROJECT_DIR$/css/animations.css" />
+    <entry file="file://$PROJECT_DIR$/css/crt_effect.css" />
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="144" column="52" lean-forward="true" selection-start-line="144" selection-start-column="52" selection-end-line="144" selection-end-column="52" />
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/animations.css">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
+        <state relative-caret-position="605">
+          <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/crt_effect.css">
+    <entry file="file://$PROJECT_DIR$/javascripts/character.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="211" selection-start-line="211" selection-end-line="211" />
+        <state relative-caret-position="225">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/javascripts/scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="64" selection-start-line="5" selection-start-column="64" selection-end-line="5" selection-end-column="64" />
+        <state relative-caret-position="755">
+          <caret line="154" column="9" lean-forward="true" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
         </state>
       </provider>
     </entry>

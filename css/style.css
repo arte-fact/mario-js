@@ -37,18 +37,19 @@ body {
 
 .tv {
     display: block;
-    position: fixed;
+    position: relative;
     background-image: url(../static/tv-overlay.png);
     z-index: 3;
     width: 913px;
     height: 647px;
     top: 93px;
     overflow: visible;
-    transform: translateX(5px);
+    transform: scale(1.26);
+    left: 131px;
 }
-.mario {
-    height: 50px;
-    position: absolute;
+
+.player {
+    background-size: 40px;
 }
 
 @keyframes flicker {
