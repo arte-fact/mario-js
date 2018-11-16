@@ -12,6 +12,22 @@ window.onload = function () {
     generateBackground()
 
 
+    let adventurerIdle = [
+        'static/adventurer/run/adventurer-idle-00.png',
+        'static/adventurer/run/adventurer-idle-01.png',
+        'static/adventurer/run/adventurer-idle-02.png',
+    ]
+
+    let adventurerRun = [
+        'static/adventurer/run/adventurer-run-00.png',
+        'static/adventurer/run/adventurer-run-01.png',
+        'static/adventurer/run/adventurer-run-02.png',
+        'static/adventurer/run/adventurer-run-03.png',
+        'static/adventurer/run/adventurer-run-04.png',
+        'static/adventurer/run/adventurer-run-05.png',
+    ]
+
+
     let playerSprites = [
         'static/mario1.png',
         'static/mario2.png',
@@ -32,13 +48,13 @@ window.onload = function () {
     let zombies = []
 
     for (let i = 0; i < 5; i++) {
-        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`, 5)
+        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`, 5, 1)
         zombie = zombie.spawn(container)
         zombie.printCharacter(container)
         zombies.push(zombie)
     }
 
-    let player = new Character(playerSprites, 300 , 200, 20, 5, 15, 40, 50, "player", 3)
+    let player = new Character(adventurerIdle, 300 , 200, 20, 5, 15, 37, 50, "player", 1, 2)
     player = player.spawn(container)
     player.printCharacter(container)
     play()

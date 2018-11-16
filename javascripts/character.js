@@ -1,4 +1,4 @@
-function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id, animSpeed) {
+function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id, animSpeed, scale) {
     this.x = x
     this.y = y
     this.id = id
@@ -17,6 +17,7 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id,
     this.verticalVelocity = 0
     this.width = width
     this.height = height
+    this.scale = scale
 
     this.infoNode = document.createElement("div")
     this.infoNode.id = `${this.id}-character-info`
@@ -44,6 +45,7 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id,
             sprite.style.width = `${this.width}px`
             sprite.style.position= "absolute"
             sprite.style.backgroundSize = `${this.width}px`
+            sprite.style.transform = `scale(${this.scale})`
 
             this.steps.push(sprite)
             this.character.appendChild(sprite)
