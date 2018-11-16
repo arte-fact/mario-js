@@ -1,4 +1,4 @@
-function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id) {
+function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id, animSpeed) {
     this.x = x
     this.y = y
     this.id = id
@@ -26,6 +26,7 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id)
     this.infoNode.style.color = "white"
     this.infoNode.style.fontSize= "10px"
     this.character.appendChild(this.infoNode)
+    this.animSpeed = animSpeed
 
 
     this.spawn = function () {
@@ -50,34 +51,20 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id)
         return this
     }
 
-    this.animate = function (state) {
+    this.animate = function (frame) {
+        let direction = Math.sign(this.speed)
+        if (direction === 0) { direction = 1 }
+
+        for (let i = 0; i < this.steps.length; i++) {
+            this.steps[i].style.visibility = "hidden"
+            this.steps[i].style.transform = `scaleX(${direction})`
+        }
+
         if (this.speed === 0) {
             this.steps[0].style.visibility = "visible"
-            this.steps[1].style.visibility = "hidden"
-            this.steps[2].style.visibility = "hidden"
         } else {
-            if (state === 0) {
-                this.steps[0].style.visibility = "hidden"
-                this.steps[1].style.visibility = "hidden"
-                this.steps[2].style.visibility = "visible"
-            }
-            if (state === 1) {
-                this.steps[0].style.visibility = "hidden"
-                this.steps[1].style.visibility = "visible"
-                this.steps[2].style.visibility = "hidden"
-            }
-        }
-
-        if (this.speed < 0) {
-            this.steps[0].style.transform = "scaleX(-1)"
-            this.steps[1].style.transform = "scaleX(-1)"
-            this.steps[2].style.transform = "scaleX(-1)"
-        }
-
-        if (this.speed > 0) {
-            this.steps[0].style.transform = "scaleX(1)"
-            this.steps[1].style.transform = "scaleX(1)"
-            this.steps[2].style.transform = "scaleX(1)"
+            let x = Math.floor(frame % (this.steps.length * this.animSpeed) / this.animSpeed)
+            this.steps[x].style.visibility = "visible"
         }
     }
 

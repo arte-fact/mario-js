@@ -4,7 +4,7 @@ window.onload = function () {
     let altitude = 550
     let stageSize = 3000
 
-    let state = 0
+    let frame = 0
 
     generateForeground()
     let midGround = generateMidground()
@@ -21,19 +21,24 @@ window.onload = function () {
     let zombieSprites = [
         'static/zombie/1.png',
         'static/zombie/2.png',
-        'static/zombie/3.png'
+        'static/zombie/3.png',
+        'static/zombie/4.png',
+        'static/zombie/5.png',
+        'static/zombie/6.png',
+        'static/zombie/7.png',
+        'static/zombie/8.png',
     ]
 
     let zombies = []
 
     for (let i = 0; i < 5; i++) {
-        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`)
+        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`, 5)
         zombie = zombie.spawn(container)
         zombie.printCharacter(container)
         zombies.push(zombie)
     }
 
-    let player = new Character(playerSprites, 300 , 200, 20, 5, 15, 40, 50, "player")
+    let player = new Character(playerSprites, 300 , 200, 20, 5, 15, 40, 50, "player", 3)
     player = player.spawn(container)
     player.printCharacter(container)
     play()
@@ -69,29 +74,24 @@ window.onload = function () {
             player.direction()
             player.run()
             player.move()
-            player.animate(state)
+            player.animate(frame)
             // player.debug()
 
             for (let j = 0; j < zombies.length; j++) {
                 let zombie = zombies[j]
                 followPlayer(zombie, player)
                 zombie.operateGravity(altitude)
-                zombie.animate(state)
+                zombie.animate(frame)
                 zombie.direction()
                 zombie.run()
                 zombie.move()
+                // zombie.debug()
             }
 
             autoScroll(playerRelativeX)
-        }, 16)
+            frame++
 
-        setInterval(function () {
-            if (state === 0) {
-                state++
-            } else {
-                state--
-            }
-        }, 66)
+        }, 16)
     }
 
     function autoScroll(playerRelativeX) {
