@@ -11,72 +11,42 @@ window.onload = function () {
     container.appendChild(midGround)
     generateBackground()
 
+    let skeletons = []
 
-    let adventurerIdle = [
-        'static/adventurer/run/adventurer-idle-00.png',
-        'static/adventurer/run/adventurer-idle-01.png',
-        'static/adventurer/run/adventurer-idle-02.png',
-    ]
-
-    let adventurerRun = [
-        'static/adventurer/run/adventurer-run-00.png',
-        'static/adventurer/run/adventurer-run-01.png',
-        'static/adventurer/run/adventurer-run-02.png',
-        'static/adventurer/run/adventurer-run-03.png',
-        'static/adventurer/run/adventurer-run-04.png',
-        'static/adventurer/run/adventurer-run-05.png',
-    ]
-
-
-    let playerSprites = [
-        'static/mario1.png',
-        'static/mario2.png',
-        'static/mario3.png'
-    ]
-
-    let zombieSprites = [
-        'static/zombie/1.png',
-        'static/zombie/2.png',
-        'static/zombie/3.png',
-        'static/zombie/4.png',
-        'static/zombie/5.png',
-        'static/zombie/6.png',
-        'static/zombie/7.png',
-        'static/zombie/8.png',
-    ]
-
-    let zombies = []
-
-    for (let i = 0; i < 5; i++) {
-        let zombie = new Character(zombieSprites, 800 + 500 * i , 200, 1, 5, 2, 100, 130, `zombie-${i}`, 5, 1)
-        zombie = zombie.spawn(container)
-        zombie.printCharacter(container)
-        zombies.push(zombie)
+    for (let i = 0; i < 15; i++) {
+        let newSkeleton = new Character(skeleton, 500 * i , 200, `skeleton-${i}`)
+        newSkeleton = newSkeleton.spawn(container)
+        newSkeleton.printCharacter(container)
+        skeletons.push(newSkeleton)
     }
 
-    let player = new Character(adventurerIdle, 300 , 200, 20, 5, 15, 37, 50, "player", 1, 2)
+    let player = new Character(adventurer, 300 , 200, "player")
     player = player.spawn(container)
     player.printCharacter(container)
     play()
 
     window.addEventListener("keypress", function (event) {
         switch (event.key) {
-            case " ": player.isJumping = true
+            case "z": player.isJumping = true
                 break
             case "d": player.right = true
                 break
             case "q": player.left = true
+                break
+            case " ": player.attack = true
                 break
         }
     });
 
     window.addEventListener("keyup", function onKeyUp(event) {
         switch (event.key) {
-            case " ": player.isJumping = false
+            case "z": player.isJumping = false
                 break
             case "d": player.right = false
                 break
             case "q": player.left = false
+                break
+            case " ": player.attack = false
                 break
         }
     });
@@ -93,15 +63,15 @@ window.onload = function () {
             player.animate(frame)
             // player.debug()
 
-            for (let j = 0; j < zombies.length; j++) {
-                let zombie = zombies[j]
-                followPlayer(zombie, player)
-                zombie.operateGravity(altitude)
-                zombie.animate(frame)
-                zombie.direction()
-                zombie.run()
-                zombie.move()
-                // zombie.debug()
+            for (let j = 0; j < skeletons.length; j++) {
+                let skeleton = skeletons[j]
+                findAndKill(skeleton, player)
+                skeleton.operateGravity(altitude)
+                skeleton.animate(frame)
+                skeleton.direction()
+                skeleton.run()
+                skeleton.move()
+                // skeleton.debug()
             }
 
             autoScroll(playerRelativeX)
@@ -161,11 +131,19 @@ window.onload = function () {
         return midGround
     }
 
-    function followPlayer(entity, player) {
-        if (entity.character.offsetLeft > player.character.offsetLeft) {
+    function findAndKill(entity, player) {
+        let dist = Math.abs(entity.character.offsetLeft - player.character.offsetLeft)
+
+        if (dist < 100) {
+            entity.attack = true
+        } else if (dist > 600) {
+            entity.attack = false
+            entity.left = false
+            entity.right = false
+        } else if (entity.character.offsetLeft > player.character.offsetLeft) {
             entity.left = true
             entity.right = false
-        } else {
+        } else if (entity.character.offsetLeft < player.character.offsetLeft) {
             entity.left = false
             entity.right = true
         }

@@ -1,7 +1,7 @@
 body {
     display: flex;
     align-items: center;
-    flex-flow: column;
+    justify-content: center;
     background-size: cover;
     background: black url(../static/space-background.jpg) no-repeat;
 }
@@ -44,10 +44,6 @@ body {
     overflow: visible;
     transform: scale(1.26);
     left: 131px;
-}
-
-.player {
-    background-size: 40px;
 }
 
 @keyframes flicker {

@@ -1,24 +1,26 @@
-function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id, animSpeed, scale) {
+function Character (sprites, x, y, id) {
     this.x = x
     this.y = y
     this.id = id
-    this.stamina = stamina
-    this.maxSpeed = maxSpeed
     this.sprites = sprites
+    this.stamina = sprites.stamina
+    this.maxSpeed = sprites.vMax
+    this.weight = sprites.weight
     this.speed = 0
     this.steps = []
     this.left = false
     this.right = false
     this.isJumping = false
+    this.attack = false
     this.character = null
-    this.weight = weight
     this.character = document.createElement("div")
     this.character.id = `${this.id}-character`
     this.verticalVelocity = 0
-    this.width = width
-    this.height = height
-    this.scale = scale
-
+    this.width = sprites.width
+    this.height = sprites.height
+    this.size = sprites.size
+    this.lastDirection = 1
+    this.translation = sprites.translation
     this.infoNode = document.createElement("div")
     this.infoNode.id = `${this.id}-character-info`
     this.infoNode.style.top = "-50px"
@@ -27,7 +29,7 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id,
     this.infoNode.style.color = "white"
     this.infoNode.style.fontSize= "10px"
     this.character.appendChild(this.infoNode)
-    this.animSpeed = animSpeed
+    this.animSpeed = sprites.animSpeed
 
 
     this.spawn = function () {
@@ -37,36 +39,90 @@ function Character (sprites, x, y, stamina, weight, maxSpeed, width, height, id,
         this.character.style.height = `${this.height}px`
         this.character.style.width = `${this.width}px`
         this.character.style.zIndex = 2
+        this.character.style.transform = `scale(3)`
+        // this.character.style.border = "thick solid yellow";
 
-        for (let i = 0; i < this.sprites.length;  i++) {
+        let run = []
+        for (let i = 0; i < this.sprites.run.length;  i++) {
             let sprite = document.createElement("div")
-            sprite.style.backgroundImage = "url('" + this.sprites[i] + "')"
+            sprite.style.backgroundImage = "url('" + this.sprites.run[i] + "')"
             sprite.style.height = `${this.height}px`
             sprite.style.width = `${this.width}px`
             sprite.style.position= "absolute"
-            sprite.style.backgroundSize = `${this.width}px`
-            sprite.style.transform = `scale(${this.scale})`
+            sprite.style.backgroundSize = `${this.size}px`
+            sprite.style.backgroundRepeat = "no-repeat"
+            sprite.style.translate = `${this.translation}%`
 
-            this.steps.push(sprite)
+            run.push(sprite)
             this.character.appendChild(sprite)
         }
+
+        let idle = []
+        for (let i = 0; i < this.sprites.idle.length;  i++) {
+            let sprite = document.createElement("div")
+            sprite.style.backgroundImage = "url('" + this.sprites.idle[i] + "')"
+            sprite.style.height = `${this.height}px`
+            sprite.style.width = `${this.width}px`
+            sprite.style.position= "absolute"
+            sprite.style.backgroundSize = `${this.size}px`
+            sprite.style.backgroundRepeat = "no-repeat"
+            sprite.style.translate = `${this.translation}%`
+
+            idle.push(sprite)
+            this.character.appendChild(sprite)
+        }
+        let attack = []
+
+        for (let i = 0; i < this.sprites.attack.length;  i++) {
+            let sprite = document.createElement("div")
+            sprite.style.backgroundImage = "url('" + this.sprites.attack[i] + "')"
+            sprite.style.height = `${this.height}px`
+            sprite.style.width = `${this.width}px`
+            sprite.style.position= "absolute"
+            sprite.style.backgroundSize = `${this.size}px`
+            sprite.style.backgroundRepeat = "no-repeat"
+            sprite.style.translate = `${this.translation}%`
+
+            attack.push(sprite)
+            this.character.appendChild(sprite)
+        }
+
+        this.steps.push(run)
+        this.steps.push(idle)
+        this.steps.push(attack)
+
         return this
     }
 
     this.animate = function (frame) {
-        let direction = Math.sign(this.speed)
-        if (direction === 0) { direction = 1 }
 
-        for (let i = 0; i < this.steps.length; i++) {
-            this.steps[i].style.visibility = "hidden"
-            this.steps[i].style.transform = `scaleX(${direction})`
+        let direction = this.lastDirection
+
+        if (Math.sign(this.speed) === 0 ) {
+            direction = this.lastDirection
+        } else {
+            direction = Math.sign(this.speed)
+            this.lastDirection = direction
         }
 
-        if (this.speed === 0) {
-            this.steps[0].style.visibility = "visible"
+        for (let j = 0; j < this.steps.length; j++) {
+            for (let i = 0; i < this.steps[j].length; i++) {
+                this.steps[j][i].style.visibility = "hidden"
+                this.steps[j][i].style.transform = `scaleX(${direction}) translate(${this.translation}, 0)`
+            }
+        }
+
+        if (this.attack) {
+            let x = Math.floor(frame % (this.steps[2].length * this.animSpeed) / this.animSpeed)
+            this.steps[2][x].style.visibility = "visible"
         } else {
-            let x = Math.floor(frame % (this.steps.length * this.animSpeed) / this.animSpeed)
-            this.steps[x].style.visibility = "visible"
+            if (this.speed === 0) {
+                let x = Math.floor(frame % (this.steps[1].length * this.animSpeed) / this.animSpeed)
+                this.steps[1][x].style.visibility = "visible"
+            } else {
+                let x = Math.floor(frame % (this.steps[0].length * this.animSpeed) / this.animSpeed)
+                this.steps[0][x].style.visibility = "visible"
+            }
         }
     }
 
