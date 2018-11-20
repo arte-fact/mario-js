@@ -1,11 +1,7 @@
-function Character (sprites, x, y, id) {
+function Character (pnjParams, x, y, id) {
     this.x = x
     this.y = y
     this.id = id
-    this.sprites = sprites
-    this.stamina = sprites.stamina
-    this.maxSpeed = sprites.vMax
-    this.weight = sprites.weight
     this.speed = 0
     this.steps = []
     this.left = false
@@ -16,20 +12,17 @@ function Character (sprites, x, y, id) {
     this.character = document.createElement("div")
     this.character.id = `${this.id}-character`
     this.verticalVelocity = 0
-    this.width = sprites.width
-    this.height = sprites.height
-    this.size = sprites.size
     this.lastDirection = 1
-    this.translation = sprites.translation
-    this.infoNode = document.createElement("div")
-    this.infoNode.id = `${this.id}-character-info`
-    this.infoNode.style.top = "-50px"
-    this.infoNode.style.position = "absolute"
-    this.infoNode.style.zIndex = 1
-    this.infoNode.style.color = "white"
-    this.infoNode.style.fontSize= "10px"
-    this.character.appendChild(this.infoNode)
-    this.animSpeed = sprites.animSpeed
+
+    this.translation = pnjParams.translation
+    this.width = pnjParams.width
+    this.height = pnjParams.height
+    this.size = pnjParams.size
+    this.animSpeed = pnjParams.animSpeed
+    this.sprites = pnjParams
+    this.stamina = pnjParams.stamina
+    this.maxSpeed = pnjParams.vMax
+    this.weight = pnjParams.weight
 
 
     this.spawn = function () {
@@ -199,7 +192,16 @@ function Character (sprites, x, y, id) {
     }
 
     this.debug = function () {
-        document.getElementById(`${this.id}-character-info`).innerText = `id: ${this.id} x: ${this.x}, y: ${this.y}, Xspeed: ${this.speed}, Yspeed: ${this.verticalVelocity}`
+
+        this.infoNode = document.createElement("div")
+        this.infoNode.id = `${this.id}-character-info`
+        this.infoNode.style.top = "-50px"
+        this.infoNode.style.position = "absolute"
+        this.infoNode.style.zIndex = 1
+        this.infoNode.style.color = "white"
+        this.infoNode.style.fontSize= "10px"
+        this.infoNode.innerText = `id: ${this.id} x: ${this.x}, y: ${this.y}, Xspeed: ${this.speed}, Yspeed: ${this.verticalVelocity}`
+        this.character.appendChild(this.infoNode)
     }
 }
 
