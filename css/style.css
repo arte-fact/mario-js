@@ -37,10 +37,10 @@ body {
     display: block;
     position: relative;
     background-image: url(../static/tv-overlay.png);
-    z-index: 3;
+    z-index: 4;
     width: 913px;
     height: 647px;
-    top: 93px;
+    top: 92px;
     overflow: visible;
     transform: scale(1.26);
     left: 131px;
