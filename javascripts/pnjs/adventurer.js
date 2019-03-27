@@ -1,6 +1,6 @@
-var adventurer = {
+const adventurer = {
     "stamina": 20,
-    "weight": 5,
+    "weight": 2,
     "vMax": 5,
     "width": 50,
     "height": 54,
@@ -29,8 +29,8 @@ var adventurer = {
     ]
 }
 
-var skeleton = {
-    "stamina": 0.1,
+const skeleton = {
+    "stamina": 0.3,
     "weight": 5,
     "vMax": 2,
     "width": 50,

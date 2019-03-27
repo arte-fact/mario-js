@@ -1,13 +1,13 @@
 function Character (pnjParams, x, y, id) {
     this.x = x
     this.y = y
-    this.id = id
-    this.speed = 0
-    this.steps = []
     this.left = false
     this.right = false
     this.isJumping = false
     this.attack = false
+    this.id = id
+    this.speed = 0
+    this.steps = []
     this.character = null
     this.character = document.createElement("div")
     this.character.id = `${this.id}-character`
@@ -23,6 +23,8 @@ function Character (pnjParams, x, y, id) {
     this.stamina = pnjParams.stamina
     this.maxSpeed = pnjParams.vMax
     this.weight = pnjParams.weight
+
+    this.name = `player_${id}`
 
 
     this.spawn = function () {
@@ -160,7 +162,7 @@ function Character (pnjParams, x, y, id) {
 
     this.operateGravity = function (altitude) {
         if (this.isJumping === true && this.collideDown(altitude)) {
-            this.verticalVelocity -= this.stamina * 2
+            this.verticalVelocity -= this.stamina
         } else if (this.collideDown(altitude)) {
             this.verticalVelocity = 0
         } else {
@@ -195,12 +197,13 @@ function Character (pnjParams, x, y, id) {
 
         this.infoNode = document.createElement("div")
         this.infoNode.id = `${this.id}-character-info`
-        this.infoNode.style.top = "-50px"
+        this.infoNode.style.top = "-5px"
+        this.infoNode.style.left = "20px"
         this.infoNode.style.position = "absolute"
         this.infoNode.style.zIndex = 1
         this.infoNode.style.color = "white"
-        this.infoNode.style.fontSize= "10px"
-        this.infoNode.innerText = `id: ${this.id} x: ${this.x}, y: ${this.y}, Xspeed: ${this.speed}, Yspeed: ${this.verticalVelocity}`
+        this.infoNode.style.fontSize= "5px"
+        this.infoNode.innerText = `${this.id}`
         this.character.appendChild(this.infoNode)
     }
 }

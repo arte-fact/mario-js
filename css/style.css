@@ -1,4 +1,5 @@
 body {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,10 +7,16 @@ body {
     background: black url(../static/space-background.jpg) no-repeat;
 }
 
+.tv-container {
+    position: relative;
+    animation: ease come-from-outer-space 5s;
+}
+
 .crt {
-    top: 100px;
-    background-color: cornflowerblue;
-    position: fixed;
+    left: 50px;
+    background-color: black;
+    position: relative;
+    top: 83px;
     width: 810px;
     height: 600px;
     margin: 0;
@@ -34,17 +41,20 @@ body {
 }
 
 .tv {
-    display: block;
-    position: relative;
+    display: flex;
+    position: absolute;
     background-image: url(../static/tv-overlay.png);
-    z-index: 4;
-    width: 913px;
-    height: 647px;
-    top: 92px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 3;
+    width: 1150px;
+    height: 810px;
+    /*top: 92px;*/
     overflow: visible;
-    transform: scale(1.26);
-    left: 131px;
+    /*transform: scale(1.26);*/
+    /*left: 131px;*/
 }
+
 
 @keyframes flicker {
 
@@ -54,5 +64,18 @@ body {
 
     100% {
         opacity: 0.8429888213;
+    }
+}
+
+@keyframes come-from-outer-space {
+    0% {
+        transform: translate(-80%, -20%) scale(0) rotate(0);
+    }
+    /*50% {*/
+        /*transform: translate(-100%, 0%) scale(0) rotate(0);*/
+    /*}*/
+
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0);
     }
 }
