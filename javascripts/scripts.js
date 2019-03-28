@@ -1,5 +1,5 @@
 window.onload = function () {
-    const socket = new SockJS('//localhost:8080/websocket/tracker');
+    const socket = new SockJS('//websocket.flexiflex.tk/websocket/tracker');
     let stompClient = Stomp.over(socket);
     stompClient.debug = null
     stompClient.connect({},
